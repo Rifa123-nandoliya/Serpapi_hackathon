@@ -2,21 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  Briefcase,
-  CircleAlert,
-  ExternalLink,
-  IndianRupee,
-  Newspaper,
-  RotateCcw,
-  RotateCw,
-  Sparkles,
-  Star,
-  Store,
-  TrendingUp,
-  TriangleAlert,
-  type LucideIcon,
-} from "lucide-react";
+import { CircleAlert, ExternalLink, RotateCcw, RotateCw, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
@@ -25,59 +11,19 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
-import { formatRelativeShort } from "@/lib/format";
 import { useMonitoring, useRefreshMonitoring } from "@/lib/queries";
 import { sourceLabel } from "@/lib/sources";
 import { useHydratedStore, useWorkspaceStore } from "@/lib/store";
-import type { Competitor, MonitoringEvent, MonitoringEventType, Severity } from "@/lib/types";
+import type { Competitor, MonitoringEvent } from "@/lib/types";
 import { useNow } from "@/lib/use-now";
 import { cn } from "@/lib/utils";
+
+import { EVENT_TYPE, RelativeTime, SEVERITY, SeverityBadge, simulatedWeek } from "@/components/monitoring/event-meta";
 
 import { FreshnessBadge } from "./freshness-badge";
 import { Panel, SectionHeader } from "./section-header";
 
-// ---------------------------------------------------------------------------
-// Presentation maps (semantic colours from CLAUDE.md §2: red = high, amber = medium, grey = low)
-// ---------------------------------------------------------------------------
-
-const SEVERITY: Record<Severity, { label: string; badge: string; stripe: string }> = {
-  high: {
-    label: "High",
-    badge: "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400",
-    stripe: "bg-risk-high",
-  },
-  medium: {
-    label: "Medium",
-    badge: "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400",
-    stripe: "bg-risk-medium",
-  },
-  low: {
-    label: "Low",
-    badge: "bg-muted text-muted-foreground",
-    stripe: "bg-inactive",
-  },
-};
-
-const EVENT_TYPE: Record<MonitoringEventType, { label: string; icon: LucideIcon }> = {
-  rating_change: { label: "Rating", icon: Star },
-  price_change: { label: "Price", icon: IndianRupee },
-  hiring: { label: "Hiring", icon: Briefcase },
-  news: { label: "News", icon: Newspaper },
-  complaint_spike: { label: "Complaint spike", icon: TrendingUp },
-  new_competitor: { label: "New competitor", icon: Store },
-};
-
 const HIGHLIGHT_MS = 2600;
-
-function simulatedWeek(event: MonitoringEvent): number | null {
-  const match = /-sim-w(\d+)-/.exec(event.id);
-  return match ? Number(match[1]) : null;
-}
-
-function RelativeTime({ iso, now }: { iso: string; now: number | null }) {
-  if (now === null) return <span className="inline-block h-3 w-12 animate-pulse rounded bg-muted align-middle" />;
-  return <time dateTime={iso}>{formatRelativeShort(iso, now)}</time>;
-}
 
 // ---------------------------------------------------------------------------
 // Change feed item
@@ -116,11 +62,7 @@ function FeedItem({
       >
         <span aria-hidden="true" className={cn("absolute inset-y-0 left-0 w-1", severity.stripe)} />
         <div className="flex flex-wrap items-center gap-2">
-          <span className={cn("inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-semibold", severity.badge)}>
-            <TriangleAlert aria-hidden="true" className="size-3" />
-            {severity.label}
-            <span className="sr-only"> severity</span>
-          </span>
+          <SeverityBadge level={event.severity} />
           <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
             <Icon aria-hidden="true" className="size-3.5" />
             {type.label}

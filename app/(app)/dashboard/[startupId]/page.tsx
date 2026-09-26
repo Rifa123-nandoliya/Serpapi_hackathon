@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Startup dashboard" };
+import { StartupDashboard } from "@/components/dashboard/startup-dashboard";
+import { getMockBundle } from "@/lib/mock";
 
-export default async function StartupDashboardPage({
-  params,
-}: {
-  params: Promise<{ startupId: string }>;
-}) {
+type Props = { params: Promise<{ startupId: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { startupId } = await params;
+  const name = getMockBundle(startupId)?.startup.name;
+  return { title: name ? `${name} dashboard` : "Startup dashboard" };
+}
 
-  return (
-    <section>
-      <h1 className="text-3xl font-bold tracking-tight text-foreground">Startup dashboard</h1>
-      <p className="mt-2 text-neutral-500">Startup: {startupId}</p>
-    </section>
-  );
+export default async function StartupDashboardPage({ params }: Props) {
+  const { startupId } = await params;
+  return <StartupDashboard startupId={startupId} />;
 }
