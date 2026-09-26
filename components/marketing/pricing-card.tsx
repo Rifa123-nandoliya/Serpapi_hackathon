@@ -35,7 +35,7 @@ export function PricingCard({
       className={cn(
         "rounded-[2rem] p-2.5 sm:p-3",
         popular
-          ? "bg-[linear-gradient(180deg,#F6A36F_0%,var(--brand-light)_40%,var(--brand)_100%)] shadow-[0_24px_48px_-20px_rgb(240_90_40/0.45)] md:-mt-10"
+          ? "bg-[linear-gradient(180deg,#F6A36F_0%,var(--brand-light)_40%,var(--brand)_100%)] shadow-[0_24px_48px_-20px_rgb(240_90_40/0.45)] lg:-mt-10"
           : "bg-[linear-gradient(180deg,#E0E0E0_0%,#EDEDED_50%,#F5F5F5_100%)] dark:bg-[linear-gradient(180deg,#2a2a2a,#1a1a1a)]",
         className,
       )}
@@ -43,7 +43,7 @@ export function PricingCard({
       <div
         className={cn(
           "flex h-full flex-col rounded-[1.5rem] bg-background p-6 shadow-[0_1px_2px_rgb(0_0_0/0.06)] sm:p-7",
-          popular && "md:pt-10",
+          popular && "lg:pt-10",
         )}
       >
         <div className="flex items-center gap-2">
@@ -57,8 +57,8 @@ export function PricingCard({
           )}
         </div>
 
-        <p className="mt-6 flex items-baseline gap-1.5">
-          <span className="text-5xl font-bold tracking-tight text-foreground">{price}</span>
+        <p className="mt-6 flex flex-wrap items-baseline gap-x-1.5">
+          <span className="text-4xl font-bold tracking-tight text-foreground lg:text-5xl">{price}</span>
           {period && <span className="text-lg text-muted-foreground">{period}</span>}
         </p>
         {description && <p className="mt-3 text-[15px] text-muted-foreground">{description}</p>}

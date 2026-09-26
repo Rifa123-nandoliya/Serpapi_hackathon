@@ -1,11 +1,34 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: { absolute: "GapScope — Competitor intelligence you can prove" } };
+import { Comparison } from "@/components/home/comparison";
+import { Cta } from "@/components/home/cta";
+import { DataSources } from "@/components/home/data-sources";
+import { FeatureCardsRow } from "@/components/home/feature-cards-row";
+import { FeaturesBento } from "@/components/home/features-bento";
+import { Founders } from "@/components/home/founders";
+import { Hero } from "@/components/home/hero";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { PricingPreview } from "@/components/home/pricing-preview";
+import { Stats } from "@/components/home/stats";
 
+export const metadata: Metadata = {
+  title: { absolute: "GapScope — Competitor intelligence you can prove" },
+};
+
+// Section order follows CLAUDE.md §6 "Home". The Footer (section 11) comes from the layout.
 export default function HomePage() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 pt-32 pb-24 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold tracking-tight text-foreground">Home</h1>
-    </section>
+    <>
+      <Hero />
+      <Comparison />
+      <DataSources />
+      <Stats />
+      <FeaturesBento />
+      <FeatureCardsRow />
+      <HowItWorks />
+      <PricingPreview />
+      <Founders />
+      <Cta />
+    </>
   );
 }

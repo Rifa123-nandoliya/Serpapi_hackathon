@@ -11,6 +11,8 @@ type SectionHeadingProps = {
   subtitle?: string;
   align?: "center" | "left";
   as?: "h1" | "h2";
+  /** id for the heading element, for aria-labelledby on the section. */
+  id?: string;
   className?: string;
 };
 
@@ -21,6 +23,7 @@ export function SectionHeading({
   subtitle,
   align = "center",
   as = "h2",
+  id,
   className,
 }: SectionHeadingProps) {
   const Heading = as;
@@ -34,6 +37,7 @@ export function SectionHeading({
       className={cn(align === "center" ? "mx-auto text-center" : "text-left", className)}
     >
       <Heading
+        id={id}
         className={cn(
           "font-bold tracking-tight text-balance text-foreground",
           as === "h1"
@@ -42,7 +46,7 @@ export function SectionHeading({
         )}
       >
         {before} <span className="text-gradient-brand">{highlight}</span>
-        {after ? ` ${after}` : null}
+        {after ? (/^[.,!?;:]/.test(after) ? after : ` ${after}`) : null}
       </Heading>
       {subtitle && (
         <p

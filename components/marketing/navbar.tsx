@@ -59,7 +59,7 @@ export function Navbar() {
           <Logo />
         </div>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {MARKETING_NAV_LINKS.map((link) => {
             const active = isActivePath(pathname, link.href);
             return (
@@ -87,7 +87,7 @@ export function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.2 }}
-              className="hidden flex-1 items-center justify-end gap-2 md:flex"
+              className="hidden flex-1 items-center justify-end gap-2 lg:flex"
             >
               <ThemeToggle />
               <Button asChild variant="gradient" size="lg" className="rounded-lg">
@@ -97,7 +97,7 @@ export function Navbar() {
           )}
         </AnimatePresence>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
