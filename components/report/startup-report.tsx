@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CircleAlert, RotateCw } from "lucide-react";
 import { toast } from "sonner";
 
@@ -13,6 +14,7 @@ import { CompetitorsTab } from "./competitors-tab";
 import { CustomerVoiceTab } from "./customer-voice-tab";
 import { FreshnessBadge } from "./freshness-badge";
 import { GapsTab } from "./gaps-tab";
+import { MonitoringTab } from "./monitoring-tab";
 import { OverviewTab } from "./overview-tab";
 import { PlanTab } from "./plan-tab";
 import { ReportHeader } from "./report-header";
@@ -27,13 +29,29 @@ const SECTION_LABEL: Record<ReportSection, string> = {
   plan: "Plan",
 };
 
-type TabValue = "overview" | "competitors" | "customer-voice" | "gaps" | "plan" | "monitoring";
+const TABS = ["overview", "competitors", "customer-voice", "gaps", "plan", "monitoring"] as const;
+type TabValue = (typeof TABS)[number];
+
+function isTab(value: string | null): value is TabValue {
+  return value !== null && (TABS as readonly string[]).includes(value);
+}
 
 export function StartupReport({ startupId }: { startupId: string }) {
   const startupQuery = useStartup(startupId);
   const reportQuery = useReport(startupId);
   const refresh = useRefreshReport(startupId);
-  const [tab, setTab] = useState<TabValue>("overview");
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab");
+  const [tab, setTabState] = useState<TabValue>(isTab(initialTab) ? initialTab : "overview");
+
+  /** Keep ?tab= in the URL so a refresh or shared link opens the same tab. */
+  const setTab = (next: TabValue) => {
+    setTabState(next);
+    const url = new URL(window.location.href);
+    if (next === "overview") url.searchParams.delete("tab");
+    else url.searchParams.set("tab", next);
+    window.history.replaceState(window.history.state, "", url);
+  };
 
   if (startupQuery.isPending || reportQuery.isPending) return <ReportSkeleton />;
 
@@ -100,9 +118,12 @@ export function StartupReport({ startupId }: { startupId: string }) {
             <TabsTrigger value="customer-voice" className="rounded-full px-4">Customer Voice</TabsTrigger>
             <TabsTrigger value="gaps" className="rounded-full px-4">Gaps</TabsTrigger>
             <TabsTrigger value="plan" className="rounded-full px-4">Plan</TabsTrigger>
-            <TabsTrigger value="monitoring" disabled className="rounded-full px-4" title="Coming in the next step">
+            <TabsTrigger value="monitoring" className="rounded-full px-4">
+              <span className="relative flex size-2" aria-hidden="true">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:hidden" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+              </span>
               Live monitoring
-              <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">Soon</span>
             </TabsTrigger>
           </TabsList>
         </div>
@@ -121,6 +142,9 @@ export function StartupReport({ startupId }: { startupId: string }) {
         </TabsContent>
         <TabsContent value="plan">
           <PlanTab {...props} onOpenGaps={openGaps} />
+        </TabsContent>
+        <TabsContent value="monitoring">
+          <MonitoringTab startupId={startupId} competitors={report.competitors} />
         </TabsContent>
       </Tabs>
     </div>

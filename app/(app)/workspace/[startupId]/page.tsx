@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
+import { ReportSkeleton } from "@/components/report/report-skeleton";
 import { StartupReport } from "@/components/report/startup-report";
 import { getMockBundle } from "@/lib/mock";
 
@@ -13,5 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function StartupReportPage({ params }: Props) {
   const { startupId } = await params;
-  return <StartupReport startupId={startupId} />;
+  // StartupReport reads ?tab= with useSearchParams, which needs a Suspense boundary.
+  return (
+    <Suspense fallback={<ReportSkeleton />}>
+      <StartupReport startupId={startupId} />
+    </Suspense>
+  );
 }

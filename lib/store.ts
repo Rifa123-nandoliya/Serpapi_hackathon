@@ -100,7 +100,12 @@ export const useWorkspaceStore = create<WorkspaceState>()(
 
       simulateNextWeek: (startupId) => {
         const week = (get().simulatedWeeks[startupId] ?? 0) + 1;
-        const events = simulateWeekEvents(startupId, week, new Date().toISOString());
+        // Newer than every earlier simulated event for this startup, even on rapid clicks.
+        const latest = get()
+          .simulatedEvents.filter((e) => e.startupId === startupId)
+          .reduce((max, e) => Math.max(max, Date.parse(e.at)), 0);
+        const base = Math.max(Date.now(), latest + 5000);
+        const events = simulateWeekEvents(startupId, week, new Date(base).toISOString());
         set((state) => ({
           simulatedEvents: [...events, ...state.simulatedEvents],
           simulatedWeeks: { ...state.simulatedWeeks, [startupId]: week },

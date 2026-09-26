@@ -99,7 +99,8 @@ const STUDY_TEMPLATES: EventTemplate[] = [
 
 /**
  * Deterministic "next week" monitoring events for the Simulate button.
- * `week` starts at 1; `baseTime` is the ISO time the user clicked.
+ * `week` starts at 1; `baseTime` is the time of the newest event (the store keeps it
+ * later than any earlier simulated week, so weeks never interleave).
  */
 export function simulateWeekEvents(
   startupId: string,
@@ -116,7 +117,8 @@ export function simulateWeekEvents(
       ...template,
       id: `${startupId}-sim-w${week}-${i + 1}`,
       startupId,
-      at: new Date(baseMs - i * 37 * 60 * 1000).toISOString(),
+      // One second apart, so each week's events stay together and newest-first.
+      at: new Date(baseMs - i * 1000).toISOString(),
     };
   });
 }
