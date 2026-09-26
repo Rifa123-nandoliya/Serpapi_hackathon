@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * GapScope design tokens (CLAUDE.md §2).
+ * Light mode is the primary design and must match design-reference/.
+ */
+:root {
+  --radius: 0.75rem;
+
+  /* Surfaces */
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #fafafa;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+
+  /* Buttons / interactive */
+  --primary: #171717;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --destructive: #dc2626;
+
+  /* Lines */
+  --border: #ededed;
+  --input: #e5e5e5;
+  --ring: #f05a28;
+
+  /* Brand (orange) */
+  --brand: #f05a28;
+  --brand-light: #f4845f;
+  --brand-foreground: #ffffff;
+  --brand-soft: #fff1eb;
+
+  /* Primary button gradient */
+  --btn-from: #3f3f3f;
+  --btn-to: #0a0a0a;
+
+  /* Data semantics */
+  --opportunity: #f05a28;
+  --risk-medium: #f59e0b;
+  --risk-high: #dc2626;
+  --inactive: #a3a3a3;
+
+  /* Marketing surfaces */
+  --footer: #fafafa;
+  --hero-glow: #fbd3c1;
+
+  /* Charts */
+  --chart-1: #f05a28;
+  --chart-2: #f4845f;
+  --chart-3: #f59e0b;
+  --chart-4: #737373;
+  --chart-5: #d4d4d4;
+
+  /* App shell sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171717;
+  --sidebar-primary: #171717;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #ededed;
+  --sidebar-ring: #f05a28;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #141414;
+  --card-foreground: #fafafa;
+  --popover: #141414;
+  --popover-foreground: #fafafa;
+
+  --primary: #fafafa;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1c1c1c;
+  --secondary-foreground: #fafafa;
+  --muted: #1f1f1f;
+  --muted-foreground: #a3a3a3;
+  --accent: #1f1f1f;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+
+  --border: #262626;
+  --input: #2e2e2e;
+  --ring: #f4845f;
+
+  --brand: #f26a3d;
+  --brand-light: #f79a78;
+  --brand-foreground: #ffffff;
+  --brand-soft: #2a1710;
+
+  --btn-from: #fafafa;
+  --btn-to: #d4d4d4;
+
+  --opportunity: #f26a3d;
+  --risk-medium: #fbbf24;
+  --risk-high: #ef4444;
+  --inactive: #525252;
+
+  --footer: #111111;
+  --hero-glow: #4a2415;
+
+  --chart-1: #f26a3d;
+  --chart-2: #f79a78;
+  --chart-3: #fbbf24;
+  --chart-4: #a3a3a3;
+  --chart-5: #404040;
+
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #fafafa;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #1f1f1f;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #262626;
+  --sidebar-ring: #f4845f;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand: var(--brand);
+  --color-brand-light: var(--brand-light);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-opportunity: var(--opportunity);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-high: var(--risk-high);
+  --color-inactive: var(--inactive);
+  --color-footer: var(--footer);
+  --color-hero-glow: var(--hero-glow);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -8px rgb(0 0 0 / 0.08);
+  --shadow-float: 0 2px 4px rgb(0 0 0 / 0.04), 0 16px 40px -12px rgb(0 0 0 / 0.14);
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+/* Orange gradient headline words: "Features so good you'll <Love us>" */
+@utility text-gradient-brand {
+  background-image: linear-gradient(90deg, var(--brand), var(--brand-light));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Dark gradient primary button with inner top highlight ("Get Started") */
+@utility bg-primary-gradient {
+  background-image: linear-gradient(180deg, var(--btn-from), var(--btn-to));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 1px 2px rgb(0 0 0 / 0.12),
+    0 6px 16px -6px rgb(0 0 0 / 0.35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
