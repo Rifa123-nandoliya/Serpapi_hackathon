@@ -10,6 +10,7 @@ export function FeaturesBento() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           id="features-heading"
+          size="lg"
           before="Features so good you'll"
           highlight="ship faster"
           subtitle="Four of the things GapScope does for you, from watching competitors around the world to finding neighbours when you have no competitors at all."

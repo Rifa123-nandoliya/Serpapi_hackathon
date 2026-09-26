@@ -47,7 +47,7 @@ export function ReportHeader({ startup }: { startup: Startup }) {
           )}
         </div>
       </div>
-      <Button asChild variant="gradient" size="xl" className="shrink-0 self-start">
+      <Button asChild variant="gradient" size="lg" className="shrink-0 self-start">
         <Link href={`/dashboard/${startup.id}`}>
           <ChartColumn aria-hidden="true" />
           Open dashboard

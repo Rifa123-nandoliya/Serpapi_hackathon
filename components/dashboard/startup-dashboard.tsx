@@ -11,6 +11,7 @@ import { StartupNotFound } from "@/components/report/startup-not-found";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMonitoring, useRefreshMonitoring, useRefreshRisks, useRisks, useStartup } from "@/lib/queries";
+import { highestSeverity } from "@/lib/mock";
 import { cn } from "@/lib/utils";
 
 import { healthTier } from "./health";
@@ -74,6 +75,8 @@ export function StartupDashboard({ startupId }: { startupId: string }) {
 
   const { startup, summary } = overview;
   const tier = healthTier(summary.healthScore);
+  // Derived from the live risk list so the tile always agrees with the Risk Radar below.
+  const highestRisk = risks.risks.length ? highestSeverity(risks.risks.map((r) => r.level)) : null;
 
   const tiles = [
     {
@@ -94,8 +97,12 @@ export function StartupDashboard({ startupId }: { startupId: string }) {
     },
     {
       label: "Highest risk",
-      value: <SeverityBadge level={summary.highestRisk} suffix="risk" className="px-2.5 py-1 text-sm" />,
-      note: `${risks.risks.length} risks tracked`,
+      value: highestRisk ? (
+        <SeverityBadge level={highestRisk} suffix="risk" className="px-2.5 py-1 text-sm" />
+      ) : (
+        <span className="text-base font-medium text-muted-foreground">None</span>
+      ),
+      note: `${risks.risks.length} ${risks.risks.length === 1 ? "risk" : "risks"} tracked`,
     },
     {
       label: startup.nearestNeighbourMode ? "Neighbours watched" : "Competitors watched",
@@ -115,7 +122,7 @@ export function StartupDashboard({ startupId }: { startupId: string }) {
             {startup.category} · {startup.location}
           </p>
         </div>
-        <Button asChild variant="subtle" size="lg" className="self-start rounded-lg sm:self-auto">
+        <Button asChild variant="gradient" size="lg" className="self-start sm:self-auto">
           <Link href={`/workspace/${startup.id}`}>
             <FileText aria-hidden="true" />
             Open report

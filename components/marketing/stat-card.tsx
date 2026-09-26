@@ -19,7 +19,7 @@ export function StatCard({ value, label, className }: StatCardProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)] bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:24px_24px] opacity-60"
       />
-      <p className="relative text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+      <p className="relative text-4xl font-bold tracking-tight text-foreground lg:text-[2.5rem]">
         {value}
       </p>
       <p className="relative mt-2 text-base text-muted-foreground sm:text-lg">{label}</p>

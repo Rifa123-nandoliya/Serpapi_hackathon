@@ -16,13 +16,13 @@ type Bubble = {
 
 // Positions mirror the scattered avatars in 08-testimonials.png.
 const BUBBLES: Bubble[] = [
-  { initials: "AK", tone: "bg-orange-100 text-orange-700", size: "size-24 sm:size-32 text-2xl", position: "left-[8%] top-[22%]", delay: 0 },
-  { initials: "PS", tone: "bg-neutral-100 text-neutral-500", size: "size-20 sm:size-28 text-xl", position: "left-[46%] top-[2%]", delay: -1.2, faded: true },
-  { initials: "RM", tone: "bg-neutral-100 text-neutral-500", size: "size-20 sm:size-28 text-xl", position: "right-[2%] top-[8%]", delay: -2.4, faded: true },
-  { initials: "NJ", tone: "bg-sky-200 text-sky-800", size: "size-24 sm:size-32 text-2xl", position: "left-[2%] top-[58%]", delay: -0.6 },
-  { initials: "VD", tone: "bg-emerald-100 text-emerald-700", size: "size-20 sm:size-28 text-xl", position: "left-[30%] bottom-[0%]", delay: -1.8 },
-  { initials: "SK", tone: "bg-sky-100 text-sky-700", size: "size-24 sm:size-32 text-2xl", position: "right-[6%] bottom-[2%]", delay: -3 },
-  { initials: "MT", tone: "bg-neutral-100 text-neutral-400", size: "size-16 sm:size-24 text-lg", position: "right-[0%] top-[52%]", delay: -2, faded: true },
+  { initials: "AK", tone: "bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300", size: "size-24 sm:size-32 text-2xl", position: "left-[8%] top-[22%]", delay: 0 },
+  { initials: "PS", tone: "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400", size: "size-20 sm:size-28 text-xl", position: "left-[46%] top-[2%]", delay: -1.2, faded: true },
+  { initials: "RM", tone: "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400", size: "size-20 sm:size-28 text-xl", position: "right-[2%] top-[8%]", delay: -2.4, faded: true },
+  { initials: "NJ", tone: "bg-sky-200 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300", size: "size-24 sm:size-32 text-2xl", position: "left-[2%] top-[58%]", delay: -0.6 },
+  { initials: "VD", tone: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300", size: "size-20 sm:size-28 text-xl", position: "left-[30%] bottom-[0%]", delay: -1.8 },
+  { initials: "SK", tone: "bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300", size: "size-24 sm:size-32 text-2xl", position: "right-[6%] bottom-[2%]", delay: -3 },
+  { initials: "MT", tone: "bg-neutral-100 text-neutral-400 dark:bg-neutral-800 dark:text-neutral-400", size: "size-16 sm:size-24 text-lg", position: "right-[0%] top-[52%]", delay: -2, faded: true },
 ];
 
 export function Founders() {
@@ -32,7 +32,7 @@ export function Founders() {
         <div>
           <h2
             id="founders-heading"
-            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.5rem]"
           >
             <span className="text-gradient-brand">Founders</span> love evidence
           </h2>

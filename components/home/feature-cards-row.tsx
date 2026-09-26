@@ -92,10 +92,10 @@ function CachingIllustration() {
 }
 
 const AVATARS = [
-  { initials: "AK", tone: "bg-orange-100 text-orange-700" },
-  { initials: "PS", tone: "bg-sky-100 text-sky-700" },
-  { initials: "RM", tone: "bg-emerald-100 text-emerald-700" },
-  { initials: "NJ", tone: "bg-violet-100 text-violet-700" },
+  { initials: "AK", tone: "bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300" },
+  { initials: "PS", tone: "bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300" },
+  { initials: "RM", tone: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300" },
+  { initials: "NJ", tone: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300" },
 ];
 
 function RiskIllustration() {

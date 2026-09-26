@@ -24,7 +24,7 @@ export function Logo({ href = "/", showWordmark = true, className }: LogoProps) 
     <>
       <LogoMark />
       {showWordmark && (
-        <span className="text-xl font-medium tracking-tight text-foreground">GapScope</span>
+        <span className="text-[22px] font-medium tracking-tight text-foreground">GapScope</span>
       )}
     </>
   );

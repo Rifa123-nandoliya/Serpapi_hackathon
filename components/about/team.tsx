@@ -5,10 +5,10 @@ type Member = { name: string; role: string; initials: string; tone: string };
 
 // Placeholder members (CLAUDE.md §6): replace name, role and initials with the real team.
 const TEAM: Member[] = [
-  { name: "Name", role: "Role", initials: "N", tone: "bg-orange-100 text-orange-700" },
-  { name: "Name", role: "Role", initials: "N", tone: "bg-sky-100 text-sky-700" },
-  { name: "Name", role: "Role", initials: "N", tone: "bg-emerald-100 text-emerald-700" },
-  { name: "Name", role: "Role", initials: "N", tone: "bg-violet-100 text-violet-700" },
+  { name: "Name", role: "Role", initials: "N", tone: "bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300" },
+  { name: "Name", role: "Role", initials: "N", tone: "bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300" },
+  { name: "Name", role: "Role", initials: "N", tone: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300" },
+  { name: "Name", role: "Role", initials: "N", tone: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300" },
 ];
 
 export function Team() {

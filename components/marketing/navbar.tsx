@@ -44,14 +44,14 @@ export function Navbar() {
         aria-label="Main"
         initial={false}
         animate={{
-          maxWidth: floating ? 1000 : 1280,
+          maxWidth: floating ? 780 : 1280,
           marginTop: floating ? 16 : 0,
         }}
         transition={{ type: "spring", stiffness: 260, damping: 32 }}
         className={cn(
           "pointer-events-auto mx-auto flex items-center gap-4 border transition-[background-color,box-shadow,border-color,border-radius,padding] duration-300",
           floating
-            ? "rounded-full border-border/60 bg-background/90 py-2.5 pr-3 pl-5 shadow-float backdrop-blur-md sm:pl-7"
+            ? "rounded-full border-border/60 bg-background/90 py-3 pr-3 pl-5 shadow-float backdrop-blur-md sm:pl-7"
             : "rounded-none border-transparent bg-transparent px-2 py-5 sm:px-4",
         )}
       >
@@ -68,7 +68,7 @@ export function Navbar() {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-4 py-2 text-[15px] text-foreground/80 transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                    "rounded-full px-3.5 py-2 text-base text-foreground/85 transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                     active && "text-foreground",
                   )}
                 >

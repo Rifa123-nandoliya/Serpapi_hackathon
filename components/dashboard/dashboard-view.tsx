@@ -25,7 +25,7 @@ export function DashboardView() {
             Health, alerts and risk across all your startups, plus how GapScope&apos;s cache is performing.
           </p>
         </div>
-        <Button asChild variant="subtle" size="lg" className="self-start rounded-lg sm:self-auto">
+        <Button asChild variant="gradient" size="lg" className="self-start sm:self-auto">
           <Link href="/workspace/new">
             <Plus aria-hidden="true" />
             Add startup

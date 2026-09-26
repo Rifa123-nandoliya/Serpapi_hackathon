@@ -33,7 +33,7 @@ const COLUMNS: FooterColumn[] = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-footer">
+    <footer className="bg-footer dark:border-t dark:border-border">
       <div className="mx-auto w-full max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div>
@@ -46,13 +46,13 @@ export function Footer() {
           <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-3">
             {COLUMNS.map((column) => (
               <div key={column.title}>
-                <h2 className="text-base font-semibold text-foreground">{column.title}</h2>
+                <h2 className="text-base font-semibold text-foreground lg:text-lg">{column.title}</h2>
                 <ul className="mt-5 space-y-3.5">
                   {column.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="rounded text-[15px] text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                        className="rounded text-[15px] text-muted-foreground transition-colors lg:text-[17px] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                       >
                         {link.label}
                       </Link>

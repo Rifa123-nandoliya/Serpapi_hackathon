@@ -47,7 +47,7 @@ export function WorkspaceView() {
             Every startup gets a report, live competitor monitoring and a Risk Radar.
           </p>
         </div>
-        <Button asChild variant="gradient" size="xl" className="self-start sm:self-auto">
+        <Button asChild variant="gradient" size="lg" className="self-start sm:self-auto">
           <Link href="/workspace/new">
             <Plus aria-hidden="true" />
             Add startup

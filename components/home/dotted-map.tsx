@@ -66,11 +66,11 @@ type Pin = {
 };
 
 const PINS: Pin[] = [
-  { label: "Bean Theory · Mumbai", initials: "BT", lon: 72.8, lat: 19, tone: "bg-orange-100 text-orange-700", pointer: "right", tagSide: "above" },
-  { label: "StudyGrid · Singapore", initials: "SG", lon: 103.8, lat: 1.3, tone: "bg-emerald-100 text-emerald-700", pointer: "left", tagSide: "below", className: "hidden sm:block" },
-  { label: "Notewise · London", initials: "NW", lon: -0.1, lat: 51.5, tone: "bg-violet-100 text-violet-700", pointer: "left", tagSide: "below", className: "hidden sm:block" },
-  { label: "FocusForge · San Francisco", initials: "FF", lon: -122.4, lat: 37.8, tone: "bg-rose-100 text-rose-700", pointer: "left", tagSide: "below", className: "hidden sm:block" },
-  { label: "PrepPath · São Paulo", initials: "PP", lon: -46.6, lat: -23.5, tone: "bg-sky-100 text-sky-700", pointer: "left", tagSide: "below", className: "hidden md:block" },
+  { label: "Bean Theory · Mumbai", initials: "BT", lon: 72.8, lat: 19, tone: "bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300", pointer: "right", tagSide: "above" },
+  { label: "StudyGrid · Singapore", initials: "SG", lon: 103.8, lat: 1.3, tone: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300", pointer: "left", tagSide: "below", className: "hidden sm:block" },
+  { label: "Notewise · London", initials: "NW", lon: -0.1, lat: 51.5, tone: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300", pointer: "left", tagSide: "below", className: "hidden sm:block" },
+  { label: "FocusForge · San Francisco", initials: "FF", lon: -122.4, lat: 37.8, tone: "bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300", pointer: "left", tagSide: "below", className: "hidden sm:block" },
+  { label: "PrepPath · São Paulo", initials: "PP", lon: -46.6, lat: -23.5, tone: "bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300", pointer: "left", tagSide: "below", className: "hidden md:block" },
 ];
 
 export function DottedMap() {

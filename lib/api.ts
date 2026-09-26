@@ -23,6 +23,12 @@ import type {
 
 export const USE_MOCK = true;
 
+/**
+ * Optional mock scenario for demos and QA of error/empty states:
+ * NEXT_PUBLIC_MOCK_SCENARIO=error → every call fails; =empty → no startups, events or risks.
+ */
+const MOCK_SCENARIO = process.env.NEXT_PUBLIC_MOCK_SCENARIO;
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export type FetchOptions = {
@@ -48,6 +54,7 @@ function randomBetween(min: number, max: number): number {
 async function simulateLatency(refresh = false): Promise<number> {
   const ms = refresh ? randomBetween(900, 1400) : randomBetween(300, 600);
   await wait(ms);
+  if (MOCK_SCENARIO === "error") throw new ApiError("Simulated network error", 503);
   return ms;
 }
 
@@ -101,6 +108,7 @@ export async function listStartups(local: Startup[] = []): Promise<StartupOvervi
   if (!USE_MOCK) return (await getJson<StartupOverview[]>("/startups")) ?? [];
 
   await simulateLatency();
+  if (MOCK_SCENARIO === "empty") return [];
   const localBundles = local
     .filter((s) => !getMockBundle(s.id))
     .map((s) => bundleForLocalStartup(s));
@@ -112,7 +120,10 @@ export async function getStartup(id: string, local?: Startup): Promise<StartupOv
 
   await simulateLatency();
   const bundle = findBundle(id, local);
-  return bundle ? copy(overviewOf(bundle)) : null;
+  if (!bundle) return null;
+  const overview = copy(overviewOf(bundle));
+  if (MOCK_SCENARIO === "empty") overview.summary.openAlerts = 0;
+  return overview;
 }
 
 export async function getReport(id: string, options: FetchOptions = {}): Promise<Report | null> {
@@ -147,6 +158,7 @@ export async function getMonitoring(
   if (!bundle) return null;
 
   const monitoring = copy(bundle.monitoring);
+  if (MOCK_SCENARIO === "empty") monitoring.events = [];
   if (options.refresh) monitoring.meta = liveMeta(latency, monitoring.watched.length);
   return monitoring;
 }
@@ -161,6 +173,7 @@ export async function getRisks(id: string, options: FetchOptions = {}): Promise<
   if (!bundle) return null;
 
   const risks = copy(bundle.risks);
+  if (MOCK_SCENARIO === "empty") risks.risks = [];
   if (options.refresh) risks.meta = liveMeta(latency, randomBetween(4, 8));
   return risks;
 }

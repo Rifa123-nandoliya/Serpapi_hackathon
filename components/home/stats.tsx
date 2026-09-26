@@ -14,6 +14,7 @@ export function Stats() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           id="stats-heading"
+          size="sm"
           before="Evidence with"
           highlight="NO guesswork"
           subtitle="Every number in a GapScope report comes from real reviews, searches, job posts and news, with the source one click away."

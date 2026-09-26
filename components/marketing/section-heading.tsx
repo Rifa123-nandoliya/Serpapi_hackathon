@@ -11,6 +11,8 @@ type SectionHeadingProps = {
   subtitle?: string;
   align?: "center" | "left";
   as?: "h1" | "h2";
+  /** Heading scale for h2 (the reference varies: stats ~40px, default 48px, features ~60px). */
+  size?: "sm" | "md" | "lg";
   /** id for the heading element, for aria-labelledby on the section. */
   id?: string;
   className?: string;
@@ -23,6 +25,7 @@ export function SectionHeading({
   subtitle,
   align = "center",
   as = "h2",
+  size = "md",
   id,
   className,
 }: SectionHeadingProps) {
@@ -42,7 +45,11 @@ export function SectionHeading({
           "font-bold tracking-tight text-balance text-foreground",
           as === "h1"
             ? "text-5xl leading-[1.05] sm:text-6xl lg:text-7xl"
-            : "text-3xl leading-tight sm:text-4xl lg:text-5xl",
+            : size === "lg"
+              ? "text-4xl leading-[1.1] sm:text-5xl lg:text-6xl"
+              : size === "sm"
+                ? "text-3xl leading-tight sm:text-4xl lg:text-[2.5rem]"
+                : "text-3xl leading-tight sm:text-4xl lg:text-5xl",
         )}
       >
         {before} <span className="text-gradient-brand">{highlight}</span>
@@ -52,6 +59,7 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-4 max-w-2xl text-base text-pretty text-muted-foreground sm:text-lg",
+            as === "h1" && "lg:text-xl",
             align === "center" && "mx-auto",
           )}
         >
