@@ -59,7 +59,8 @@ export function summarise(bundle: MockBundle): StartupSummary {
     return { date: monitoring.ratingSeries[0].points[i].date, value: round(avg, 2) };
   });
 
-  const timestamps = [monitoring.meta.fetchedAt, ...monitoring.events.map((e) => e.at)];
+  // createdAt matters for startups added in this browser, which reuse older mock events.
+  const timestamps = [bundle.startup.createdAt, monitoring.meta.fetchedAt, ...monitoring.events.map((e) => e.at)];
 
   return {
     startupId: bundle.startup.id,

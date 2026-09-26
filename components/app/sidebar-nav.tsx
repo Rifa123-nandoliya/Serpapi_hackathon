@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 import type { SidebarStartup } from "./sidebar-startups";
+import { useSidebarStartups } from "./use-sidebar-startups";
 
 const PRIMARY_LINKS = [
   { label: "Workspace", href: "/workspace", icon: LayoutGrid },
@@ -32,8 +33,9 @@ function isPrimaryActive(pathname: string, href: string): boolean {
 const itemClasses =
   "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none";
 
-export function SidebarNav({ startups, onNavigate }: SidebarNavProps) {
+export function SidebarNav({ startups: baseStartups, onNavigate }: SidebarNavProps) {
   const pathname = usePathname();
+  const startups = useSidebarStartups(baseStartups);
 
   return (
     <div className="flex h-full flex-col">

@@ -36,6 +36,12 @@ export type Startup = {
   createdAt: string;
   status: StartupStatus;
   nearestNeighbourMode: boolean;
+  /** Optional details collected by /workspace/new. */
+  website?: string;
+  knownCompetitors?: string[];
+  compareAgainst?: string;
+  /** Uploaded report metadata only; the file itself is not stored. */
+  reportFile?: { name: string; size: number };
 };
 
 /** Per-startup numbers shown on workspace and dashboard cards. */
@@ -225,4 +231,9 @@ export type NewStartupInput = {
   location: string;
   targetCustomer: string;
   mode: StartupMode;
+  status?: StartupStatus;
+  website?: string;
+  knownCompetitors?: string[];
+  compareAgainst?: string;
+  reportFile?: { name: string; size: number };
 };

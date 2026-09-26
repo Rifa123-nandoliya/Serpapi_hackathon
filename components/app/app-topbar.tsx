@@ -17,6 +17,7 @@ import {
 
 import { SidebarNav } from "./sidebar-nav";
 import type { SidebarStartup } from "./sidebar-startups";
+import { useSidebarStartups } from "./use-sidebar-startups";
 
 type Crumb = { label: string; href?: string };
 
@@ -46,7 +47,8 @@ function buildCrumbs(pathname: string, startups: SidebarStartup[]): Crumb[] {
 export function AppTopbar({ startups }: { startups: SidebarStartup[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const crumbs = buildCrumbs(pathname, startups);
+  const allStartups = useSidebarStartups(startups);
+  const crumbs = buildCrumbs(pathname, allStartups);
 
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-3 border-b border-border bg-background/85 px-4 backdrop-blur-md sm:px-6 lg:px-8">

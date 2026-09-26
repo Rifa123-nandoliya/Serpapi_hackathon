@@ -18,6 +18,7 @@ type WorkspaceData = {
 
 type WorkspaceActions = {
   addStartup: (input: NewStartupInput) => Startup;
+  updateStartup: (id: string, patch: Partial<Omit<Startup, "id">>) => void;
   removeStartup: (id: string) => void;
   simulateNextWeek: (startupId: string) => MonitoringEvent[];
   resetSimulation: (startupId?: string) => void;
@@ -70,12 +71,21 @@ export const useWorkspaceStore = create<WorkspaceState>()(
           targetCustomer: input.targetCustomer.trim(),
           mode: input.mode,
           createdAt: new Date().toISOString(),
-          status: "ready",
+          status: input.status ?? "ready",
           nearestNeighbourMode: false,
+          ...(input.website ? { website: input.website } : {}),
+          ...(input.knownCompetitors?.length ? { knownCompetitors: input.knownCompetitors } : {}),
+          ...(input.compareAgainst ? { compareAgainst: input.compareAgainst } : {}),
+          ...(input.reportFile ? { reportFile: input.reportFile } : {}),
         };
         set((state) => ({ userStartups: [...state.userStartups, startup] }));
         return startup;
       },
+
+      updateStartup: (id, patch) =>
+        set((state) => ({
+          userStartups: state.userStartups.map((s) => (s.id === id ? { ...s, ...patch } : s)),
+        })),
 
       removeStartup: (id) =>
         set((state) => {
