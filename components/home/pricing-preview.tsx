@@ -20,7 +20,7 @@ export function PricingPreview() {
           highlight="pays for itself"
           subtitle="One avoided wrong turn is worth more than a year of GapScope. Start free, upgrade when you start monitoring."
         />
-        <div className="mx-auto mt-16 grid max-w-md items-end gap-8 lg:mt-24 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-16 grid max-w-md gap-8 lg:mt-24 lg:max-w-none lg:grid-cols-3">
           {tiers.map((tier) => (
             <PricingCard
               key={tier.id}

@@ -9,10 +9,14 @@ export type PricingCardProps = {
   name: string;
   price: string;
   period?: string;
+  /** Small line under the price, e.g. "₹2,499/month billed yearly". */
+  priceNote?: string;
   description?: string;
   features: string[];
   cta: { label: string; href: string };
   popular?: boolean;
+  /** Smaller price text for dense layouts such as four columns. */
+  compact?: boolean;
   className?: string;
 };
 
@@ -24,10 +28,12 @@ export function PricingCard({
   name,
   price,
   period = "/month",
+  priceNote,
   description,
   features,
   cta,
   popular = false,
+  compact = false,
   className,
 }: PricingCardProps) {
   return (
@@ -58,9 +64,17 @@ export function PricingCard({
         </div>
 
         <p className="mt-6 flex flex-wrap items-baseline gap-x-1.5">
-          <span className="text-4xl font-bold tracking-tight text-foreground lg:text-5xl">{price}</span>
+          <span
+            className={cn(
+              "font-bold tracking-tight text-foreground",
+              compact ? "text-4xl" : "text-4xl lg:text-5xl",
+            )}
+          >
+            {price}
+          </span>
           {period && <span className="text-lg text-muted-foreground">{period}</span>}
         </p>
+        {priceNote && <p className="mt-1 text-sm font-medium text-brand">{priceNote}</p>}
         {description && <p className="mt-3 text-[15px] text-muted-foreground">{description}</p>}
 
         <Button asChild variant="gradient" size="xl" className="mt-6 w-full">
