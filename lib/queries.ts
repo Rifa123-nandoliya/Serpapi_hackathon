@@ -9,6 +9,7 @@ import type {
   MonitoringData,
   MonitoringEvent,
   Report,
+  ReportSection,
   RiskReport,
   Startup,
   StartupOverview,
@@ -163,13 +164,19 @@ export function useSystemStats() {
 // Refresh (FreshnessBadge "Refresh" button): fetch live data and replace the cache.
 // ---------------------------------------------------------------------------
 
+/** Refresh one report section: fetches live data and updates that section's freshness. */
 export function useRefreshReport(id: string) {
   const client = useQueryClient();
   const local = useLocalStartup(id);
   return useMutation({
-    mutationFn: () => api.getReport(id, { local, refresh: true }),
-    onSuccess: (data: Report | null) =>
-      client.setQueryData([...queryKeys.report(id), local?.id ?? null], data),
+    mutationFn: (section: ReportSection) => {
+      void section;
+      return api.getReport(id, { local, refresh: true });
+    },
+    onSuccess: (data: Report | null, section) =>
+      client.setQueryData<Report | null>([...queryKeys.report(id), local?.id ?? null], (old) =>
+        old && data ? { ...data, meta: { ...old.meta, [section]: data.meta[section] } } : data,
+      ),
   });
 }
 

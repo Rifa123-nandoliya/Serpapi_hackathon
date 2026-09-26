@@ -54,6 +54,15 @@
   --footer: #fafafa;
   --hero-glow: #fbd3c1;
 
+  /* Categorical series (validated: dataviz reference palette, light steps) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+
   /* Charts */
   --chart-1: #f05a28;
   --chart-2: #f4845f;
@@ -109,6 +118,14 @@
 
   --footer: #111111;
   --hero-glow: #4a2415;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
 
   --chart-1: #f26a3d;
   --chart-2: #f79a78;
