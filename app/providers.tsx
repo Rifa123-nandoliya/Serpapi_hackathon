@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -29,10 +30,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
         enableSystem={false}
         disableTransitionOnChange
       >
-        <TooltipProvider delayDuration={200}>
-          {children}
-          <Toaster position="bottom-right" richColors closeButton />
-        </TooltipProvider>
+        <MotionConfig reducedMotion="user">
+          <TooltipProvider delayDuration={200}>
+            {children}
+            <Toaster position="bottom-right" richColors closeButton />
+          </TooltipProvider>
+        </MotionConfig>
       </ThemeProvider>
     </QueryClientProvider>
   );
